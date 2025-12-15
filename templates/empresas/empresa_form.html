@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if form.instance.pk %}Editar{% else %}Crear{% endif %}
+
+<h1>
+    {% if form.instance.pk %}
+        Editar Producto: {{ form.instance.nombre }}
+    {% else %}
+        Crear Nuevo Producto
+    {% endif %}
+</h1>
+<a href="{% url 'empresas' %}">
+    <i></i> Volver
+
+</a>
+
+<br>
+<h5>
+    {% if form.instance.pk %}edit{% else %}plus{% endif %}
+    Información del Producto
+</h5>
+
+<form action="" method="post" novalidate>
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+        <div>
+            {% for error in form.non_field_errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {{ form }}
+
+    <a href="{% url 'empresas' %}">
+        <i></i> Cancelar
+    </a>
+    <button type="submit">
+        {% if form.instance.pk %}Actualizar{% else %}Crear{% endif %} Producto
+    </button>
+</form>
+</body>
+</html>

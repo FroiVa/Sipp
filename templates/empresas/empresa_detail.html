@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="btn-group">
+    <a href="{% url 'empresa_update' empresa.pk %}">
+        Editar
+    </a>
+    <a href="{% url 'empresas' %}">
+        Volver
+    </a>
+</div>
+
+<h5 class="card-title mb-0">
+    <i class="fas fa-info-circle me-2"></i>Información del Producto
+</h5>
+
+<table>
+    <tr>
+        <th>Nombre:</th>
+        <td>{{ empresa.nombre }}</td>
+    </tr>
+    <tr>
+        <th>Encargado:</th>
+        <td>{{ empresa.encargado }}</td>
+    </tr>
+</table>
+
+<a href="{% url 'empresas' %}">
+    Volver a Lista
+</a>
+</body>
+</html>

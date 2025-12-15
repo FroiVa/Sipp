@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="{% url 'empresa_create' %}" class="btn btn-primary">
+    <i class="fas fa-plus"></i> Nuevo Producto
+</a>
+<label for="search">Buscar</label>
+<form method="get">
+    <div>
+        <label for="search">Buscar</label>
+        <input type="text" id="search" name="search"
+               value="{{ filters.search }}" placeholder="Nombre de la empresa...">
+    </div>
+    <div>
+        <label for="tipo">Tipo</label>
+        <select id="tipo" name="tipo">
+            <option value="">Todos los tipos</option>
+            {% for tipo_val, tipo_label in tipos %}
+                <option value="{{ tipo_val }}" {% if filters.tipo == tipo_val %}selected{% endif %}>
+                    {{ tipo_label }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <label for="categoria">Categoría</label>
+        <select id="categoria" name="categoria">
+            <option value="">Todas las categorías</option>
+            {% for categoria in categorias %}
+                <option value="{{ categoria.id }}"
+                        {% if filters.categoria == categoria.id|stringformat:"s" %}selected{% endif %}>
+                    {{ categoria.nombre }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <button type="submit">
+            <i></i> Filtrar
+        </button>
+    </div>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Encargado</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for empresa in empresas %}
+        <tr>
+            <th><a href="{% url 'empresa_detail' empresa.pk %}">
+                {{ empresa.nombre }}</a></th>
+            <th>{{ empresa.encargado }}</th>
+        </tr>
+
+    {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>
